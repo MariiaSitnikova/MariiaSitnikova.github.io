@@ -3,6 +3,8 @@ var bg = new Image(); // Создание объекта
 var food = new Image(); // Создание объекта
 var asteroid = new Image(); // Создание объекта
 var meteor = new Image();
+var gameOver = new Image();
+var scoreImg = new Image();
 var foodNumber = 5;
 var asteroidsNumber = 4;
 var meow = new Audio();
@@ -17,6 +19,9 @@ bg.src = "img/bg.png"; // Аналогично
 food.src = "img/food.png"; // Аналогично
 asteroid.src = "img/asteroid.png"; // Аналогично
 meteor.src = "img/meteor.png";
+gameOver.src = "img/game-over.png";
+scoreImg.src = "img/score.png";
+
 
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
@@ -130,16 +135,14 @@ function draw() {
     }
     ctx.drawImage(Paw, xPos, yPos);
     drawAsteroids();
-    ctx.fillStyle = "#d71414";
-    ctx.font = "24px Verdana";
-    ctx.fillText('Score: ' + score, bg.width - 200, 50);
+    ctx.drawImage(scoreImg, bg.width - 250, 0);
+    ctx.fillStyle = "#990066";
+    ctx.font = "48px Berlin Sans FB";
+    ctx.fillText(score, bg.width + scoreImg.width - 250, 60);
     if (gameEnd === false) {
         window.requestAnimationFrame(draw);
     } else {
-        ctx.fillStyle = "#d71414";
-        ctx.font = "56px Verdana";
-        ctx.fillText('Your score: ' + score, 400, bg.height / 2 - 100);
-        ctx.fillText('Game over!', 400, bg.height / 2);
+        ctx.drawImage(gameOver, (bg.width - gameOver.width) / 2, (bg.height - gameOver.height) / 2);
     }
 }
 
